@@ -5,9 +5,13 @@ options:
     default: "/u/apps/configure_me/current"
   enable_alerts:
     name: Enable alerts
-    notes: When enabled an alert will be sent if a job encounters an error. Only one alert will be sent per job. A stack track will be provided in the alert body.
+    notes: "When enabled an alert will be sent if a job encounters an error. Only one alert will be sent per job, even if it runs and fails multiple times. A stack trace will be provided in the alert body. Value should be 'true' or 'false'."
     default: true
   rails_env:
     name: RAILS_ENV
     notes: "The rails environment that should be queried. For example 'production'"
     default: production
+  enable_jobs_by_priority:
+    name: Enable reporting jobs by priority
+    notes: "When enabled separate job counts will be reported by priority. Value should be 'true' or 'false'."
+    default: false

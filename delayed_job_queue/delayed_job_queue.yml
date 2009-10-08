@@ -7,3 +7,7 @@ options:
     name: Enable alerts
     notes: When enabled an alert will be sent if a job encounters an error. Only one alert will be sent per job. A stack track will be provided in the alert body.
     default: true
+  rails_env:
+    name: RAILS_ENV
+    notes: "The rails environment that should be queried. For example 'production'"
+    default: production

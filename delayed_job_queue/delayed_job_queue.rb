@@ -46,8 +46,8 @@ class DelayedJobQueue < Scout::Plugin
       job = Delayed::Job.first \
         :select => "created_at", 
         :order => 'created_at ASC'
-
-      report :age_of_oldest_job => (Time.now - job.created_at)
+      age = job ? (Time.now - job.created_at) : 0
+      report :age_of_oldest_job => age
     end
 
     def alert_jobs_with_errors

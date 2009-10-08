@@ -1,0 +1,5 @@
+options:
+  path_to_app:
+    name: Path to rails app
+    notes: "The path your rails application. With a typical capistrano deploy, it would look like: /u/apps/#{app_name}/current"
+    default: "/u/apps/configure_me/current"

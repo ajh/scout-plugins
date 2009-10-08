@@ -12,7 +12,7 @@ class DelayedJobQueue < Scout::Plugin
     report_jobs_count_by_priority
     report_jobs_with_errors_count
     report_age_of_oldest_job
-    alert_jobs_with_errors
+    alert_jobs_with_errors if @options[:enable_alerts]
   end
 
   private

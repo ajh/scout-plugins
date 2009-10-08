@@ -3,3 +3,7 @@ options:
     name: Path to rails app
     notes: "The path your rails application. With a typical capistrano deploy, it would look like: /u/apps/#{app_name}/current"
     default: "/u/apps/configure_me/current"
+  enable_alerts:
+    name: Enable alerts
+    notes: When enabled an alert will be sent if a job encounters an error. Only one alert will be sent per job. A stack track will be provided in the alert body.
+    default: true

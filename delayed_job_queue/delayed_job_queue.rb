@@ -4,8 +4,10 @@ class DelayedJobQueue < Scout::Plugin
     begin
       ENV['RAILS_ENV'] = @options['rails_env'] || 'production'
       require "#{@options['path_to_app']}/config/environment"
-    rescue Exception
-      error "Couldn't load rails environment at #{@options['path_to_app'].inspect}.", $!.message
+    rescue Exception => e
+      error \
+        "Couldn't load rails environment at #{@options['path_to_app'].inspect}.", 
+        "#{e.class.to_s}: #{e.message}"
       return
     end
 

@@ -1,4 +1,4 @@
-class DelayedJobQueue < Scout::Plugin  
+class Kettle < Scout::Plugin  
   
   # only report anything if this is the first time since a run (using memory)
   #
@@ -6,9 +6,13 @@ class DelayedJobQueue < Scout::Plugin
   # - time_since_last_run
   # - iterate through jobs and report input and output numbers
   def build_report
+    # try hard to remember this even if everything else goes wrong
+    remember :last_log_date => memory(:last_log_date)
+
     load_rails_environment or return
     KettleJobMessage.last.logdate != memory(:last_log_date) or return
 
+    # We should be here if its the first time scout has run since kettle
     report :time_since_last_run => (Time.now.utc - memory(:last_log_date)) if memory(:last_log_date)
 
     jobs = KettleJobMessage.all(:select => "distinct jobname").collect{|j| j.jobname}.sort
@@ -26,8 +30,7 @@ class DelayedJobQueue < Scout::Plugin
       end
     end
 
-  ensure
-    remember(:last_log_date) = KettleJobMessage.last.log_date
+    remember :last_log_date => KettleJobMessage.last.logdate
   end
 
   private
